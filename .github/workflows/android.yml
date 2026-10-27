@@ -23,7 +23,21 @@ jobs:
           gradle-version: "8.9"
 
       - name: Build debug APK
-        run: gradle assembleDebug --stacktrace
+        run: |
+          set -o pipefail
+          gradle assembleDebug --stacktrace 2>&1 | tee build.log
+
+      # 失败时把关键错误行提取成注释，方便在 Checks 页面直接看到
+      - name: Summarize errors
+        if: failure()
+        run: |
+          grep -E "^e: |What went wrong|Execution failed|Could not |Unresolved|error:" -A2 build.log \
+            | grep -v '^--$' | cut -c1-300 | head -n 60 > errors.txt || true
+          split -l 6 -d errors.txt chunk_
+          for f in chunk_*; do
+            msg=$(awk '{printf "%s%%0A", $0}' "$f")
+            echo "::error title=build error::${msg}"
+          done
 
       - uses: actions/upload-artifact@v4
         with:
