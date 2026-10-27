@@ -1,0 +1,28 @@
+WEBVTT
+Kind: captions
+Language: zh
+
+NOTE 这是一个示例歌词文件。把它改名成和你的音频同名（例如 夜航.mp3 → 夜航.vtt），放在同一个文件夹里即可。
+
+1
+00:00:00.000 --> 00:00:04.500
+（前奏）
+
+2
+00:00:04.500 --> 00:00:09.000
+夜色把城市轻轻折叠
+<c.en>The night folds the city in half</c.en>
+
+3
+00:00:09.000 --> 00:00:13.500 align:start position:0%
+我在霓虹的倒影里漂流
+<c.en>I drift inside the neon's reflection</c.en>
+
+4
+00:00:13.500 --> 00:00:18.000
+<v 合唱>每一次呼吸都像在发光</v>
+<c.en>Every breath seems to glow</c.en>
+
+5
+00:01:00.000 --> 00:01:05.000
+没有时和分的写法也可以：01:00.000
