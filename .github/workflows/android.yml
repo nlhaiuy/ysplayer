@@ -31,8 +31,9 @@ jobs:
       - name: Summarize errors
         if: failure()
         run: |
-          grep -E "^e: |What went wrong|Execution failed|Could not |Unresolved|error:" -A2 build.log \
-            | grep -v '^--$' | cut -c1-300 | head -n 60 > errors.txt || true
+          grep -E "^e: |issues were found|Unresolved|error:" -A45 build.log \
+            | grep -E "^e: |issues were found|Dependency|requires|minCompileSdk|compileSdk|Android Gradle plugin|AGP|Unresolved|error:" \
+            | cut -c1-300 | head -n 60 > errors.txt || true
           split -l 6 -d errors.txt chunk_
           for f in chunk_*; do
             msg=$(awk '{printf "%s%%0A", $0}' "$f")
